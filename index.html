@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='tableExample' ng-controller="MainController as mainCtrl">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+
+	<!-- Angular Material style sheet -->
+	<link rel="stylesheet"
+		href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">
+
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/app.css">
+
+	<title>Table Example</title>
+
+</head>
+
+<body ng-cloak>
+	<main>
+		<article>
+			<header>
+				<button>add</button>
+			</header>
+			<section>
+				<table>
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Name</th>
+							<th>Phone</th>
+							<th>Email</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>andy.pan</td>
+							<td>0912345678</td>
+							<td>andypan@example.com</td>
+							<td>
+								<button>Edit</button>
+							</td>
+							<td>
+								<button>Del</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</article>
+	</main>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>
+
+	<!-- Angular Material Library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>
+
+	<script src="./src/module.js"></script>
+	<script src="./src/mainController.js"></script>
+
+</body>
+
+</html>
