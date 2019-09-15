@@ -1,4 +1,4 @@
 angular.module('tableExample', [
     'ngMaterial', 
-    'ngMessages'
+    'ngMessages',
 ]);
