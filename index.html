@@ -21,7 +21,7 @@
 	<main>
 		<article>
 			<header>
-				<button>add</button>
+				<button ng-click="mainCtrl.add()">add</button>
 			</header>
 			<section>
 				<table>
@@ -36,16 +36,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>andy.pan</td>
-							<td>0912345678</td>
-							<td>andypan@example.com</td>
+						<tr ng-repeat="(idx,data) in mainCtrl.example.tableList">
+							<td ng-bind="idx + 1">1</td>
+							<td ng-bind="data.name">andy.pan</td>
+							<td ng-bind="data.phone">0912345678</td>
+							<td ng-bind="data.email">andypan@example.com</td>
 							<td>
-								<button>Edit</button>
+								<button ng-click="mainCtrl.edit(idx)">Edit</button>
 							</td>
 							<td>
-								<button>Del</button>
+								<button ng-click="mainCtrl.del(idx)">Del</button>
 							</td>
 						</tr>
 					</tbody>
