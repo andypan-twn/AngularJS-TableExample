@@ -60,9 +60,9 @@ angular.module('tableExample')
                     'type': type,
                     'title': 'Create an user',
                     'submit': 'Create',
-                    'name': undefined,
-                    'phone': undefined,
-                    'email': undefined,
+                    'name': '',
+                    'phone': '',
+                    'email': '',
                 };
             } else if (type == 'edit') {
                 mainCtrl.dialog = {
@@ -92,12 +92,14 @@ angular.module('tableExample')
                 mainCtrl.dialog = undefined;
             }
             $scope.dialogForm.$setPristine();
+            $scope.dialogForm.$setUntouched();
             $mdDialog.hide();
         }
 
         mainCtrl.dialogCancel = function () {
             mainCtrl.dialog = undefined;
             $scope.dialogForm.$setPristine();
+            $scope.dialogForm.$setUntouched();
             $mdDialog.cancel();
         }
 
@@ -122,7 +124,7 @@ angular.module('tableExample')
                     break;
             }
             mainCtrl.dialog = undefined;
-            $scope.dialogForm.$setPristine();
+            $scope.dialogForm.$setSubmitted();
             $mdDialog.hide();
         }
 

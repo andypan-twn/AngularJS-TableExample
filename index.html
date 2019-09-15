@@ -87,7 +87,7 @@
 								<label>Name</label>
 								<md-icon md-font-icon="fa fa-user"></md-icon>
 								<input name="name" ng-model="mainCtrl.dialog.name" type="text" ng-required="true" ng-change="mainCtrl.checkUnique(dialogForm.name)">
-								<div ng-messages="dialogForm.name.$error">
+								<div ng-if="dialogForm.name.$dirty" ng-messages="dialogForm.name.$error">
 									<div ng-message="required">This is required.</div>
 									<div ng-message="nameExist">Name exist.</div>
 								</div>
@@ -98,7 +98,7 @@
 								<md-icon md-font-icon="fa fa-phone"></md-icon>
 								<input name="phone" ng-model="mainCtrl.dialog.phone" type="text" ng-required="true"
 									aria-label="Phone Number" ng-pattern="mainCtrl.phoneRegex">
-								<div ng-messages="dialogForm.phone.$error">
+								<div ng-if="dialogForm.phone.$dirty" ng-messages="dialogForm.phone.$error">
 									<div ng-message="required">This is required.</div>
 									<div ng-message="pattern">Invalid format.</div>
 								</div>
@@ -109,7 +109,7 @@
 								<md-icon md-font-icon="fa fa-envelope"></md-icon>
 								<input name="email" ng-model="mainCtrl.dialog.email" type="email" ng-required="true"
 									aria-label="Email">
-								<div ng-messages="dialogForm.email.$error">
+								<div ng-if="dialogForm.email.$dirty" ng-messages="dialogForm.email.$error">
 									<div ng-message="required">This is required.</div>
 									<div ng-message="email">Invalid email address.</div>
 								</div>
