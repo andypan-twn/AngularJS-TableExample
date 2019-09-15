@@ -14,23 +14,25 @@ angular.module('tableExample')
                     'phone': '+886912345678',
                     'email': 'user@test.com.tw',
                 },
-            ]
+            ],
+
         };
+        mainCtrl.phoneRegex = /^[0-9+-]+$/;
 
 
         mainCtrl.add = function (name, phone, email) {
             mainCtrl.example.tableList.push({
-                name: name,
-                phone: phone,
-                email: email,
+                'name': name,
+                'phone': phone,
+                'email': email,
             });
         };
 
         mainCtrl.edit = function (idx, name, phone, email) {
             mainCtrl.example.tableList[idx] = {
-                name: name,
-                phone: phone,
-                email: email,
+                'name': name,
+                'phone': phone,
+                'email': email,
             };
         };
 
@@ -55,28 +57,33 @@ angular.module('tableExample')
         mainCtrl.showDialog = function (ev, type, idx) {
             if (mainCtrl.dialog == undefined && type == 'create') {
                 mainCtrl.dialog = {
-                    type: type,
-                    title: 'Create an user',
-                    submit: 'Create',
-                    name: undefined,
-                    phone: undefined,
-                    email: undefined,
+                    'type': type,
+                    'title': 'Create an user',
+                    'submit': 'Create',
+                    'name': undefined,
+                    'phone': undefined,
+                    'email': undefined,
                 };
             } else if (type == 'edit') {
                 mainCtrl.dialog = {
-                    type: type,
-                    index: idx,
-                    title: 'Edit an user',
-                    submit: 'Update',
-                    name: mainCtrl.example.tableList[idx].name,
-                    phone: mainCtrl.example.tableList[idx].phone,
-                    email: mainCtrl.example.tableList[idx].email,
+                    'type': type,
+                    'index': idx,
+                    'title': 'Edit an user',
+                    'submit': 'Update',
+                    'name': mainCtrl.example.tableList[idx].name,
+                    'phone': mainCtrl.example.tableList[idx].phone,
+                    'email': mainCtrl.example.tableList[idx].email,
                 };
             }
+            mainCtrl.nameList = Object.values(mainCtrl.example.tableList).map(
+                function (item) {
+                    return item.name
+                }
+            );
             $mdDialog.show({
-                contentElement: '#dialog',
-                targetEvent: ev,
-                clickOutsideToClose: true,
+                'contentElement': '#dialog',
+                'targetEvent': ev,
+                'clickOutsideToClose': true,
             });
         };
 
@@ -84,20 +91,19 @@ angular.module('tableExample')
             if (mainCtrl.dialog.type == 'edit') {
                 mainCtrl.dialog = undefined;
             }
+            $scope.dialogForm.$setPristine();
             $mdDialog.hide();
         }
 
         mainCtrl.dialogCancel = function () {
             mainCtrl.dialog = undefined;
+            $scope.dialogForm.$setPristine();
             $mdDialog.cancel();
         }
 
         mainCtrl.dialogSubmit = function () {
             var dialogVal = mainCtrl.dialog;
 
-            if (dialogVal.name == '' || dialogVal.phone == '' || dialogVal.email == '' || dialogVal.name == undefined || dialogVal.phone == undefined || dialogVal.email == undefined) {
-                return;
-            }
             switch (dialogVal.type) {
                 case 'create':
                     mainCtrl.add(
@@ -115,6 +121,20 @@ angular.module('tableExample')
                     );
                     break;
             }
+            mainCtrl.dialog = undefined;
+            $scope.dialogForm.$setPristine();
             $mdDialog.hide();
+        }
+
+        mainCtrl.checkUnique = function (fromObj) {
+            var nameList = mainCtrl.nameList;
+
+            if (mainCtrl.dialog.type == 'edit' && mainCtrl.example.tableList[mainCtrl.dialog.index].name === mainCtrl.dialog.name) {
+                fromObj.$setValidity("nameExist", true);
+            } else if (nameList.indexOf(mainCtrl.dialog.name) != -1) {
+                fromObj.$setValidity("nameExist", false);
+            } else {
+                fromObj.$setValidity("nameExist", true);
+            }
         }
     });                   

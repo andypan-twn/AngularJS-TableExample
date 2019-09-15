@@ -24,7 +24,8 @@
 			<md-toolbar class="md-hue-2">
 				<header class="md-toolbar-tools">
 					<h1 flex>This is AngualrJS table example</h1>
-					<md-button class="md-fab md-mini md-hue-3" aria-label="Add new user" ng-click="mainCtrl.showDialog($event, 'create')">
+					<md-button class="md-fab md-mini md-hue-3" aria-label="Add new user"
+						ng-click="mainCtrl.showDialog($event, 'create')">
 						<i class="fas fa-user-plus"></i>
 					</md-button>
 				</header>
@@ -33,7 +34,7 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th class="col-1">No</th>
+							<th class="col-1">Serial Number</th>
 							<th class="col-2">Name</th>
 							<th class="col-2">Phone</th>
 							<th class="col-3">Email</th>
@@ -81,23 +82,39 @@
 
 				<md-dialog-content>
 					<md-content class="md-no-momentum">
-						<md-input-container class="md-icon-float md-block">
-							<label>Name</label>
-							<md-icon md-font-icon="fa fa-user"></md-icon>
-							<input ng-model="mainCtrl.dialog.name" type="text" ng-required="true">
-						</md-input-container>
+						<form name="dialogForm">
+							<md-input-container class="md-icon-float md-block">
+								<label>Name</label>
+								<md-icon md-font-icon="fa fa-user"></md-icon>
+								<input name="name" ng-model="mainCtrl.dialog.name" type="text" ng-required="true" ng-change="mainCtrl.checkUnique(dialogForm.name)">
+								<div ng-messages="dialogForm.name.$error">
+									<div ng-message="required">This is required.</div>
+									<div ng-message="nameExist">Name exist.</div>
+								</div>
+							</md-input-container>
 
-						<md-input-container class="md-block">
-							<label>Phone</label>
-							<md-icon md-font-icon="fa fa-phone"></md-icon>
-							<input ng-model="mainCtrl.dialog.phone" type="text" ng-required="true" aria-label="Phone Number">
-						</md-input-container>
+							<md-input-container class="md-block">
+								<label>Phone</label>
+								<md-icon md-font-icon="fa fa-phone"></md-icon>
+								<input name="phone" ng-model="mainCtrl.dialog.phone" type="text" ng-required="true"
+									aria-label="Phone Number" ng-pattern="mainCtrl.phoneRegex">
+								<div ng-messages="dialogForm.phone.$error">
+									<div ng-message="required">This is required.</div>
+									<div ng-message="pattern">Invalid format.</div>
+								</div>
+							</md-input-container>
 
-						<md-input-container class="md-block">
-							<label>Email</label>
-							<md-icon md-font-icon="fa fa-envelope"></md-icon>
-							<input ng-model="mainCtrl.dialog.email" type="email" ng-required="true" aria-label="Email">
-						</md-input-container>
+							<md-input-container class="md-block">
+								<label>Email</label>
+								<md-icon md-font-icon="fa fa-envelope"></md-icon>
+								<input name="email" ng-model="mainCtrl.dialog.email" type="email" ng-required="true"
+									aria-label="Email">
+								<div ng-messages="dialogForm.email.$error">
+									<div ng-message="required">This is required.</div>
+									<div ng-message="email">Invalid email address.</div>
+								</div>
+							</md-input-container>
+						</form>
 					</md-content>
 				</md-dialog-content>
 
@@ -106,7 +123,7 @@
 						Cencel
 					</md-button>
 					<span flex></span>
-					<md-button class="md-primary"  ng-click="mainCtrl.dialogSubmit()" ng-bind="mainCtrl.dialog.submit">
+					<md-button class="md-primary" ng-click="mainCtrl.dialogSubmit()" ng-bind="mainCtrl.dialog.submit" ng-disabled='dialogForm.$invalid'>
 						Edit
 					</md-button>
 				</md-dialog-actions>
