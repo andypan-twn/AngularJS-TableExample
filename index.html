@@ -7,12 +7,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 
 	<!-- Angular Material style sheet -->
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">
+	<link rel="stylesheet"
+		href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">
 	<link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
 
 	<link rel="stylesheet" href="./css/reset.css">
 	<link rel="stylesheet" href="./css/app.css">
-	<link rel="stylesheet" href="./css/table.css">
 
 	<title>Table Example</title>
 
@@ -24,7 +24,7 @@
 			<md-toolbar class="md-hue-2">
 				<header class="md-toolbar-tools">
 					<h1 flex>This is AngualrJS table example</h1>
-					<md-button class="md-fab md-mini md-hue-3" aria-label="Add new user" ng-click="mainCtrl.add()">
+					<md-button class="md-fab md-mini md-hue-3" aria-label="Add new user" ng-click="mainCtrl.showDialog($event, 'create')">
 						<i class="fas fa-user-plus"></i>
 					</md-button>
 				</header>
@@ -48,12 +48,14 @@
 							<td ng-bind="data.phone">0912345678</td>
 							<td ng-bind="data.email">andypan@example.com</td>
 							<td>
-								<md-button class="md-raised md-primary" aria-label="Edit user" ng-click="mainCtrl.edit(idx)">
+								<md-button class="md-raised md-primary" aria-label="Edit user"
+									ng-click="mainCtrl.showDialog($event, 'edit', idx)">
 									<i class="fas fa-user-edit"></i>
 								</md-button>
 							</td>
 							<td>
-								<md-button class="md-raised md-warn" aria-label="Delete user" ng-click="mainCtrl.del(idx)">
+								<md-button class="md-raised md-warn" aria-label="Delete user"
+									ng-click="mainCtrl.del($event, idx)">
 									<i class="fas fa-user-times"></i>
 								</md-button>
 							</td>
@@ -64,6 +66,53 @@
 		</article>
 	</main>
 
+	<div style="visibility: hidden">
+		<div class="md-dialog-container" id="dialog">
+			<md-dialog aria-label="dialog">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2 ng-bind="mainCtrl.dialog.title">Edit User</h2>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="mainCtrl.dialogHide()">
+							<md-icon md-font-icon="fa fa-times-circle"></md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+
+				<md-dialog-content>
+					<md-content class="md-no-momentum">
+						<md-input-container class="md-icon-float md-block">
+							<label>Name</label>
+							<md-icon md-font-icon="fa fa-user"></md-icon>
+							<input ng-model="mainCtrl.dialog.name" type="text" ng-required="true">
+						</md-input-container>
+
+						<md-input-container class="md-block">
+							<label>Phone</label>
+							<md-icon md-font-icon="fa fa-phone"></md-icon>
+							<input ng-model="mainCtrl.dialog.phone" type="text" ng-required="true" aria-label="Phone Number">
+						</md-input-container>
+
+						<md-input-container class="md-block">
+							<label>Email</label>
+							<md-icon md-font-icon="fa fa-envelope"></md-icon>
+							<input ng-model="mainCtrl.dialog.email" type="email" ng-required="true" aria-label="Email">
+						</md-input-container>
+					</md-content>
+				</md-dialog-content>
+
+				<md-dialog-actions layout="row">
+					<md-button class="md-warn" ng-click="mainCtrl.dialogCancel()">
+						Cencel
+					</md-button>
+					<span flex></span>
+					<md-button class="md-primary"  ng-click="mainCtrl.dialogSubmit()" ng-bind="mainCtrl.dialog.submit">
+						Edit
+					</md-button>
+				</md-dialog-actions>
+			</md-dialog>
+		</div>
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>

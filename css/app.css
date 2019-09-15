@@ -39,3 +39,7 @@ md-toolbar {
 .col-3 {
 	width: 30%;
 }
+
+md-content {
+	padding: 0px 20px;
+}
