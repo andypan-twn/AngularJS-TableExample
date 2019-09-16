@@ -1,0 +1,45 @@
+main {
+	padding: 20px;
+}
+article {
+	border-radius: 5px;
+}
+md-toolbar {
+	border-radius: 5px 5px 0 0;
+}
+
+.table {
+	width: 100%;
+}
+.table tr:first-child {
+	border-top: 1px solid #e0e0e0;
+}
+.table tr {
+	border-bottom: 1px solid #e0e0e0;
+}
+.table tr:last-child {
+	border-bottom: 0px;
+}
+.table th,td{
+	height: 50px;
+	vertical-align: middle;
+	text-align: center;
+}
+.table tbody tr:focus,
+.table tbody tr:hover {
+	background-color: rgba(63,81,181,0.05);
+}
+
+.col-1 {
+	width: 10%;
+}
+.col-2 {
+	width: 20%;
+}
+.col-3 {
+	width: 30%;
+}
+
+md-content {
+	padding: 0px 20px;
+}

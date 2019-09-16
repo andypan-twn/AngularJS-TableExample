@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='tableExample' ng-controller="MainController as mainCtrl">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+
+	<!-- Angular Material style sheet -->
+	<link rel="stylesheet"
+		href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">
+	<link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
+
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/app.css">
+
+	<title>Table Example</title>
+
+</head>
+
+<body ng-cloak>
+	<main>
+		<article class="md-whiteframe-9dp">
+			<md-toolbar class="md-hue-2">
+				<header class="md-toolbar-tools">
+					<h1 flex>This is AngualrJS table example</h1>
+					<md-button class="md-fab md-mini md-hue-3" aria-label="Create new user"
+						ng-click="mainCtrl.showDialog($event, 'create')">
+						<md-tooltip md-direction="left">Create new user</md-tooltip>
+						<i class="fas fa-user-plus"></i>
+					</md-button>
+				</header>
+			</md-toolbar>
+			<section>
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="col-1">Serial Number</th>
+							<th class="col-2">Name</th>
+							<th class="col-2">Phone</th>
+							<th class="col-3">Email</th>
+							<th class="col-1">Edit</th>
+							<th class="col-1">Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="(idx,data) in mainCtrl.example.tableList">
+							<td ng-bind="idx + 1">1</td>
+							<td ng-bind="data.name">andy.pan</td>
+							<td ng-bind="data.phone">0912345678</td>
+							<td ng-bind="data.email">andypan@example.com</td>
+							<td>
+								<md-button class="md-raised md-primary" aria-label="Edit user"
+									ng-click="mainCtrl.showDialog($event, 'edit', idx)">
+									<md-tooltip md-direction="bottom">Edit {{data.name}}</md-tooltip>
+									<i class="fas fa-user-edit"></i>
+								</md-button>
+							</td>
+							<td>
+								<md-button class="md-raised md-warn" aria-label="Delete user"
+									ng-click="mainCtrl.del($event, idx)">
+									<md-tooltip md-direction="bottom">Delete {{data.name}}</md-tooltip>
+									<i class="fas fa-user-times"></i>
+								</md-button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</article>
+	</main>
+
+	<div style="visibility: hidden">
+		<div class="md-dialog-container" id="dialog">
+			<md-dialog aria-label="dialog">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2 ng-bind="mainCtrl.dialog.title">Edit User</h2>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="mainCtrl.dialogHide()">
+							<md-icon md-font-icon="fa fa-times-circle"></md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
+
+				<md-dialog-content>
+					<md-content class="md-no-momentum">
+						<form name="dialogForm">
+							<md-input-container class="md-icon-float md-block">
+								<label>Name</label>
+								<md-icon md-font-icon="fa fa-user"></md-icon>
+								<input name="name" ng-model="mainCtrl.dialog.name" type="text" ng-required="true" ng-change="mainCtrl.checkUnique(dialogForm.name)">
+								<div ng-if="dialogForm.name.$dirty" ng-messages="dialogForm.name.$error">
+									<div ng-message="required">This is required.</div>
+									<div ng-message="nameExist">Name exist.</div>
+								</div>
+							</md-input-container>
+
+							<md-input-container class="md-block">
+								<label>Phone</label>
+								<md-icon md-font-icon="fa fa-phone"></md-icon>
+								<input name="phone" ng-model="mainCtrl.dialog.phone" type="text" ng-required="true"
+									aria-label="Phone Number" ng-pattern="mainCtrl.phoneRegex">
+								<div ng-if="dialogForm.phone.$dirty" ng-messages="dialogForm.phone.$error">
+									<div ng-message="required">This is required.</div>
+									<div ng-message="pattern">Invalid format.</div>
+								</div>
+							</md-input-container>
+
+							<md-input-container class="md-block">
+								<label>Email</label>
+								<md-icon md-font-icon="fa fa-envelope"></md-icon>
+								<input name="email" ng-model="mainCtrl.dialog.email" type="email" ng-required="true"
+									aria-label="Email">
+								<div ng-if="dialogForm.email.$dirty" ng-messages="dialogForm.email.$error">
+									<div ng-message="required">This is required.</div>
+									<div ng-message="email">Invalid email address.</div>
+								</div>
+							</md-input-container>
+						</form>
+					</md-content>
+				</md-dialog-content>
+
+				<md-dialog-actions layout="row">
+					<md-button class="md-warn" ng-click="mainCtrl.dialogCancel()">
+						Cencel
+					</md-button>
+					<span flex></span>
+					<md-button class="md-primary" ng-click="mainCtrl.dialogSubmit()" ng-bind="mainCtrl.dialog.submit" ng-disabled='dialogForm.$invalid'>
+						Edit
+					</md-button>
+				</md-dialog-actions>
+			</md-dialog>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>
+
+	<!-- Angular Material Library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>
+
+	<script src="./src/module.js"></script>
+	<script src="./src/mainController.js"></script>
+
+</body>
+
+</html>
