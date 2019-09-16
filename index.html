@@ -24,8 +24,9 @@
 			<md-toolbar class="md-hue-2">
 				<header class="md-toolbar-tools">
 					<h1 flex>This is AngualrJS table example</h1>
-					<md-button class="md-fab md-mini md-hue-3" aria-label="Add new user"
+					<md-button class="md-fab md-mini md-hue-3" aria-label="Create new user"
 						ng-click="mainCtrl.showDialog($event, 'create')">
+						<md-tooltip md-direction="left">Create new user</md-tooltip>
 						<i class="fas fa-user-plus"></i>
 					</md-button>
 				</header>
@@ -51,12 +52,14 @@
 							<td>
 								<md-button class="md-raised md-primary" aria-label="Edit user"
 									ng-click="mainCtrl.showDialog($event, 'edit', idx)">
+									<md-tooltip md-direction="bottom">Edit {{data.name}}</md-tooltip>
 									<i class="fas fa-user-edit"></i>
 								</md-button>
 							</td>
 							<td>
 								<md-button class="md-raised md-warn" aria-label="Delete user"
 									ng-click="mainCtrl.del($event, idx)">
+									<md-tooltip md-direction="bottom">Delete {{data.name}}</md-tooltip>
 									<i class="fas fa-user-times"></i>
 								</md-button>
 							</td>
