@@ -1,4 +1,8 @@
 angular.module('tableExample', [
     'ngMaterial', 
-    'ngMessages'
-]);
+    'ngMessages',
+]).config(function($mdIconProvider) {
+    $mdIconProvider
+        .defaultFontSet('FontAwesome')
+        .fontSet('fa', 'FontAwesome');
+});

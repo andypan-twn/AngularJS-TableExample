@@ -1,48 +1,45 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+main {
+	padding: 20px;
+}
+article {
+	border-radius: 5px;
+}
+md-toolbar {
+	border-radius: 5px 5px 0 0;
+}
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+.table {
+	width: 100%;
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+.table tr:first-child {
+	border-top: 1px solid #e0e0e0;
 }
-body {
-	line-height: 1;
+.table tr {
+	border-bottom: 1px solid #e0e0e0;
 }
-ol, ul {
-	list-style: none;
+.table tr:last-child {
+	border-bottom: 0px;
 }
-blockquote, q {
-	quotes: none;
+.table th,td{
+	height: 50px;
+	vertical-align: middle;
+	text-align: center;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+.table tbody tr:focus,
+.table tbody tr:hover {
+	background-color: rgba(63,81,181,0.05);
 }
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+
+.col-1 {
+	width: 10%;
+}
+.col-2 {
+	width: 20%;
+}
+.col-3 {
+	width: 30%;
+}
+
+md-content {
+	padding: 0px 20px;
 }
