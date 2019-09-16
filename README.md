@@ -7,6 +7,7 @@ Example for table list via AngularJS Material Style
 2. Check your network connection status. We use CDN to get AngularJS Framwork. 
 3. Open `index.html` file on browser.
 4. Enjoy!
+![image](https://github.com/andykuen/AngularJS-TableExample/blob/feature/document/assets/images/example.png)
 
 ## Design principle
 
