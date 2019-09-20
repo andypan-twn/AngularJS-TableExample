@@ -1,5 +1,5 @@
 # AngularJS-TableExample
-Example for table list via AngularJS Material Style
+Example for table list via AngularJS Material Style <br>
 [Demo](https://andykuen.github.io/AngularJS-TableExample/index.html)
 
 ## How to use
